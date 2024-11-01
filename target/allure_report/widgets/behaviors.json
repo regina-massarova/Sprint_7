@@ -1,0 +1,1 @@
+{"total":2,"items":[{"uid":"822637f7db8d96d9e48863316ff4a604","name":"API тесты для курьеров","statistic":{"failed":0,"broken":0,"skipped":0,"passed":9,"unknown":0,"total":9}},{"uid":"27be02377d92b52b4063f2bd5fe128db","name":"API тесты для заказов","statistic":{"failed":0,"broken":0,"skipped":0,"passed":5,"unknown":0,"total":5}}]}

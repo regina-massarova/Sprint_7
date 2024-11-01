@@ -16,9 +16,8 @@ class TestCourierCreation:
         with allure.step("Отправка запроса на создание курьера"):
             response = requests.post(f"{BASE_URL}/courier", json=courier_data)
 
-        assert response.status_code == 201, f"Ожидался код 201, получен {response.status_code}. Ответ: {response.text}"
+        assert response.status_code == 201, ERROR_MESSAGES["invalid_field"].format(expected=201, actual=response.status_code, response=response.text)
         assert response.json().get("ok") is True, "Ожидался ответ {'ok': true}"
-
 
     @allure.title("Создание курьера: попытка создать дубликат")
     def test_create_duplicate_courier(self):
@@ -28,7 +27,7 @@ class TestCourierCreation:
         with allure.step("Отправка запроса на создание дубликата курьера"):
             response_second = requests.post(f"{BASE_URL}/courier", json=courier_data)
 
-        assert response_second.status_code == 409, f"Ожидался код 409, получен {response_second.status_code}. Ответ: {response_second.text}"
+        assert response_second.status_code == 409, ERROR_MESSAGES["invalid_field"].format(expected=409, actual=response_second.status_code, response=response_second.text)
         assert response_second.json().get("message") == ERROR_MESSAGES["duplicate_login"], "Ожидалось сообщение об ошибке дублирования логина"
 
     @pytest.mark.parametrize("field", ["login", "password"])
@@ -41,5 +40,5 @@ class TestCourierCreation:
         with allure.step(f"Отправка запроса на создание курьера без поля: {field}"):
             response = requests.post(f"{BASE_URL}/courier", json=courier_data_dict)
 
-        assert response.status_code == 400, f"Ожидался код 400, получен {response.status_code}. Ответ: {response.text}"
-        assert response.json().get("message") == "Недостаточно данных для создания учетной записи", "Ожидалось сообщение об ошибке отсутствия поля"
+        assert response.status_code == 400, ERROR_MESSAGES["invalid_field"].format(expected=400, actual=response.status_code, response=response.text)
+        assert response.json().get("message") == ERROR_MESSAGES["missing_field"], "Ожидалось сообщение об ошибке отсутствия поля"

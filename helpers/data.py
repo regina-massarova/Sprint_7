@@ -15,5 +15,6 @@ ORDER_TEST_DATA = {
 ERROR_MESSAGES = {
     "duplicate_login": "Этот логин уже используется. Попробуйте другой.",
     "missing_field": "Недостаточно данных для создания учетной записи",
-    "account_not_found": "Учетная запись не найдена"
+    "account_not_found": "Учетная запись не найдена",
+    "invalid_field": "Ожидался код {expected}, получен {actual}. Ответ: {response}"
 }
